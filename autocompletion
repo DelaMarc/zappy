@@ -1,0 +1,75 @@
+#!/bin/sh
+## autocompletion.sh for Zappy in /home/gigoma_l/rendu/PSU_2015_zappy
+##
+## Made by Loïc GIGOMAS
+## Login   <gigoma_l@epitech.net>
+##
+## Started on  Fri Jun 24 18:57:04 2016 Loïc GIGOMAS
+## Last update Fri Jun 24 19:22:05 2016 Loïc GIGOMAS
+##
+
+_zappy_ai()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="-h -p -n"
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    case "$prev" in
+	-h)
+	    COMPREPLY=( $( compgen -W "localhost" -- $cur ) )
+	    return 0
+	    ;;
+	-p)
+	    COMPREPLY=( $( compgen -W "4242" -- $cur ) )
+	    return 0
+	    ;;
+	-n)
+	    COMPREPLY=( $( compgen -W "aTeamName" -- $cur ) )
+	    return 0
+	    ;;
+    esac
+}
+complete -F _zappy_ai ./zappy_ai
+complete -F _zappy_ai ./debug_ai.sh
+
+_zappy_server()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="-p -x -y -n -c -t"
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    case "$prev" in
+	-p)
+	    COMPREPLY=( $( compgen -W "4242" -- $cur ) )
+	    return 0
+	    ;;
+	-x)
+	    COMPREPLY=( $( compgen -W "16" -- $cur ) )
+	    return 0
+	    ;;
+	-y)
+	    COMPREPLY=( $( compgen -W "16" -- $cur ) )
+	    return 0
+	    ;;
+	-n)
+	    COMPREPLY=( $( compgen -W "aTeamName" -- $cur ) )
+	    return 0
+	    ;;
+	-c)
+	    COMPREPLY=( $( compgen -W "4" -- $cur ) )
+	    return 0
+	    ;;
+	-t)
+	    COMPREPLY=( $( compgen -W "100" -- $cur ) )
+	    return 0
+	    ;;
+    esac
+}
+complete -F _zappy_server ./zappy_server
+complete -F _zappy_server ./debug_server.sh
